@@ -21,3 +21,18 @@ const load = useCallback(async () => {
     setAttendance(att);
     setLoading(false);
   }, [user]);
+useEffect(() => {
+    load();
+  }, [load]);
+
+  const acceptedApplications = applications.filter((a) => a.status === 'accepted');
+  const activeStudents = acceptedApplications.length;
+  const todayDate = new Date().toISOString().split('T')[0];
+  const todayClasses = attendance.filter((a) => a.date === todayDate);
+  const now = Date.now();
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
+  const monthEarnings = acceptedApplications.reduce((sum, a) => {
+    const job = a.job;
+    if (job && a.appliedAt >= monthStart) return sum + job.fee;
+    return sum;
+  }, 0);
