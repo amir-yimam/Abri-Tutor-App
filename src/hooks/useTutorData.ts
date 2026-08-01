@@ -2,3 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '@/src/context/AuthContext';
 import { localTutors, localApplications, localAttendance, localJobs } from '@/src/services/backend';
 import type { Application, Attendance, Job, TutorProfile } from '@/src/types';
+export function useTutorData() {
+  const { user } = useAuth();
+  const [profile, setProfile] = useState<TutorProfile | null>(null);
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [attendance, setAttendance] = useState<Attendance[]>([]);
+  const [loading, setLoading] = useState(true);
