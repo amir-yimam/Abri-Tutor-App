@@ -8,3 +8,16 @@ export function useTutorData() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [attendance, setAttendance] = useState<Attendance[]>([]);
   const [loading, setLoading] = useState(true);
+const load = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    const [p, apps, att] = await Promise.all([
+      localTutors.get(user.uid),
+      localApplications.byTutor(user.uid),
+      localAttendance.byTutor(user.uid),
+    ]);
+    setProfile(p);
+    setApplications(apps);
+    setAttendance(att);
+    setLoading(false);
+  }, [user]);
