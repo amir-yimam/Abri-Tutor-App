@@ -10,3 +10,10 @@ export function formatDate(timestamp: number | string | Date): string {
     year: 'numeric',
   });
 }
+export function formatTime(timestamp: number | string | Date): string {
+  const d = new Date(timestamp);
+  return d.toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
