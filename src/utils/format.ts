@@ -17,3 +17,6 @@ export function formatTime(timestamp: number | string | Date): string {
     minute: '2-digit',
   });
 }
+export function todayString(): string {
+  return new Date().toISOString().split('T')[0];
+}
