@@ -24,3 +24,6 @@ export function monthLabel(month: number, year: number): string {
   const d = new Date(year, month - 1, 1);
   return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 }
+export function getDaysInMonth(year: number, month: number): number {
+  return new Date(year, month, 0).getDate();
+}
