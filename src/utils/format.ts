@@ -27,3 +27,8 @@ export function monthLabel(month: number, year: number): string {
 export function getDaysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
+export function hoursBetween(start: string, end: string): number {
+  const s = new Date(start).getTime();
+  const e = new Date(end).getTime();
+  return Math.max(0, Math.round((e - s) / (1000 * 60 * 60) * 10) / 10);
+}
