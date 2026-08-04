@@ -20,3 +20,7 @@ export function formatTime(timestamp: number | string | Date): string {
 export function todayString(): string {
   return new Date().toISOString().split('T')[0];
 }
+export function monthLabel(month: number, year: number): string {
+  const d = new Date(year, month - 1, 1);
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+}
