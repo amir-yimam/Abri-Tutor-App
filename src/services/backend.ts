@@ -672,23 +672,3 @@ export const dbProfiles = {
   },
 };
 
-export const dbStorage = {
-  async uploadProfilePhoto(uid: string, fileUri: string): Promise<string | null> {
-    const ext = fileUri.split('.').pop()?.toLowerCase() ?? 'jpg';
-    const path = `${uid}/photo.${ext}`;
-    const { error } = await supabase.storage
-      .from('profile-photos')
-      .upload(path, { uri: fileUri } as unknown as Blob, {
-        cacheControl: '3600',
-        upsert: true,
-      });
-    if (error) throw new Error(error.message);
-    const { data } = supabase.storage.from('profile-photos').getPublicUrl(path);
-    return data.publicUrl;
-  },
-};
-
-// ---------- Demo seed (no-op with real backend) ----------
-export async function seedDemoJobs(): Promise<void> {
-  // No longer needed with real backend - parents create real jobs
-}
